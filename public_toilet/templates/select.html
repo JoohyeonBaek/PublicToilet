@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+{%  block explain_contents %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>공중화장실 찾기</title>
+    {% block header %}
+    {% endblock header%}
+</head>
+<body>
+<style>
+        .main{
+            width: auto;
+            height: 160px;
+            background:#9CC6FF;
+            border-radius: 15px;
+            padding-top: 3px;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-top: 20px;
+        }
+        div p{
+            margin-top: 40px;
+            margin-bottom: 15px;
+            margin-right: 20px;
+            margin-left: 20px;
+            font-family: "잘풀리는하루 Medium";
+            font-size: 40px;
+            color: white;
+        }
+        div span{
+            color: white;
+            font-family: "잘풀리는하루 Medium";
+            margin-left: 20px;
+            font-size:18px;
+        }
+        .box{
+            background:#9CC6FF;
+            height:25px;
+            width:auto;
+            border-radius: 8px;
+            margin-left:20px;
+            margin-top:20px;
+            margin-right: 20px;
+        }
+        section{
+            width:60%;
+            height:700px;
+            margin:20px;
+            padding:10px;
+            border:4px solid #9CC6FF;
+            border-radius: 15px;
+        }
+        aside{
+            width:40%;
+            height:120px;
+            margin:10px;
+            padding:10px;
+        }
+        input[type=button]{
+            background-color:#9CC6FF;
+            border-color:white;
+            color:white;
+            width:100px;
+            height:55px;
+            border-radius: 8px;
+            font-family: "잘풀리는하루 Medium";
+            font-size: 18px;
+
+        }
+
+
+
+</style>
+<header>
+    <div class="main">
+        <p><b>공중화장실 찾기</b></p>
+        <span>찾으시는 조건을 검색하시면 해당되는 공중화장실의 위치를 보실 수 있습니다.</span>
+    </div>
+
+</header>
+<main>
+    <form>
+        <input type="button" name="search" value="주변 화장실 검색" onclick="location.href='http://127.0.0.1:8000/map'">
+    </form>
+    <form>
+        <input type="button" name="search" value="조건 검색" onclick="location.href='http://127.0.0.1:8000/option'">
+    </form>
+    </aside>
+</main>
+
+
+{% endblock explain_contents%}
+</body>
+</html>
