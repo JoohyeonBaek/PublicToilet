@@ -3,6 +3,3 @@
 
 
 K-Digital 3 Team Project
-
-공공데이터
-naver map api
