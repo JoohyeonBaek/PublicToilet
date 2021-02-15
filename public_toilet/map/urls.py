@@ -4,7 +4,7 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.post_view, name='index2'),
+    path('', views.wonju_view, name='index2'),
 ]
 
 

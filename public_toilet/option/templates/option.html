@@ -191,31 +191,31 @@
 
 
       </script>
-   </form>
 
    <div class="open_time">
       개방시간 :
-      <input type="radio" name="open_time" value="time1"> 상관없음
+      <input type="radio" name="open_time" value="time1" checked="checked"> 상관없음
       <input type="radio" name="open_time" value="time2"> 24시간(연중무휴)
-      <input type="radio" name="open_time" value="time3"> 09~18시
+      <input type="radio" name="open_time" value="time3"> 그외
    </div><br>
    <div class="male_female">
       남여공용화장실 :
-      <input type="radio" name="male_female" value="sex1"> 상관없음
+      <input type="radio" name="male_female" value="sex1" checked="checked"> 상관없음
       <input type="radio" name="male_female" value="sex2"> YES
       <input type="radio" name="male_female" value="sex3"> NO
    </div><br>
     <div class="disabled">
       남/녀 장애인 변기 유무 :
-      <input type="radio" name="disabled" value="dis1"> 상관없음
+      <input type="radio" name="disabled" value="dis1" checked="checked"> 상관없음
       <input type="radio" name="disabled" value="dis2"> 남자 장애인 변기 유
       <input type="radio" name="disabled" value="dis3"> 여자 장애인 변기 유
    </div><br>
     <div class="child_toilet">
       남/녀 어린이용 변기 유무 :
-      <input type="radio" name="child_toilet" value="child1"> 상관없음
+      <input type="radio" name="child_toilet" value="child1" checked="checked"> 상관없음
       <input type="radio" name="child_toilet" value="child2"> 남자 어린이용 변기 유
       <input type="radio" name="child_toilet" value="child3"> 여자 어린이용 변기 유
    </div><br>
     <input type="submit" value="찾아보기">
+    </form>
 {% endblock explain_contents %}

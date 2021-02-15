@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'public_toilet',  # mysql
         'USER': 'root',  # root
-        'PASSWORD': '******',  # password
+        'PASSWORD': '22gkrsus',  # password
         'HOST': 'localhost',
         'PORT': '3306'
     }

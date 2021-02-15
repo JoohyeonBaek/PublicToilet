@@ -7,7 +7,6 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
@@ -103,7 +102,6 @@ class BusanBuk(models.Model):
 
 
 class BusanDong(models.Model):
-    num = models.AutoField(primary_key=True)
     toilet_name = models.CharField(max_length=50, blank=True, null=True)
     male_female = models.CharField(max_length=1, blank=True, null=True)
     male_disabled_toilet_public_toiletnum = models.IntegerField(blank=True, null=True)
@@ -1295,6 +1293,34 @@ class GangwonDonghae(models.Model):
         db_table = 'gangwon_donghae'
 
 
+class GangwonGoseong(models.Model):
+    toilet_name = models.CharField(max_length=50, blank=True, null=True)
+    male_female = models.CharField(max_length=1, blank=True, null=True)
+    male_disabled_toilet_public_toiletnum = models.IntegerField(blank=True, null=True)
+    open_time = models.CharField(max_length=50, blank=True, null=True)
+    management_agency = models.CharField(max_length=50, blank=True, null=True)
+    male_toilent_num = models.IntegerField(blank=True, null=True)
+    male_disabled_urinal_num = models.IntegerField(blank=True, null=True)
+    call_number = models.CharField(max_length=50, blank=True, null=True)
+    land_address = models.CharField(max_length=100, blank=True, null=True)
+    female_toilet_num = models.IntegerField(blank=True, null=True)
+    sortation = models.CharField(max_length=50, blank=True, null=True)
+    male_urinal_num = models.IntegerField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+    female_child_toilet_num = models.IntegerField(blank=True, null=True)
+    road_address = models.CharField(max_length=100, blank=True, null=True)
+    male_child_toilet_num = models.IntegerField(blank=True, null=True)
+    male_child_urinal_num = models.IntegerField(blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
+    female_disabled_toilet_num = models.IntegerField(blank=True, null=True)
+    installation_year = models.CharField(max_length=50, blank=True, null=True)
+    update_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'gangwon_goseong'
+
+
 class GangwonHongcheon(models.Model):
     toilet_name = models.CharField(max_length=50, blank=True, null=True)
     male_female = models.CharField(max_length=1, blank=True, null=True)
@@ -1407,8 +1433,35 @@ class GangwonJeongseon(models.Model):
         db_table = 'gangwon_jeongseon'
 
 
+class GangwonPyeongchang(models.Model):
+    toilet_name = models.CharField(max_length=50, blank=True, null=True)
+    male_female = models.CharField(max_length=1, blank=True, null=True)
+    male_disabled_toilet_public_toiletnum = models.IntegerField(blank=True, null=True)
+    open_time = models.CharField(max_length=50, blank=True, null=True)
+    management_agency = models.CharField(max_length=50, blank=True, null=True)
+    male_toilent_num = models.IntegerField(blank=True, null=True)
+    male_disabled_urinal_num = models.IntegerField(blank=True, null=True)
+    call_number = models.CharField(max_length=50, blank=True, null=True)
+    land_address = models.CharField(max_length=100, blank=True, null=True)
+    female_toilet_num = models.IntegerField(blank=True, null=True)
+    sortation = models.CharField(max_length=50, blank=True, null=True)
+    male_urinal_num = models.IntegerField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+    female_child_toilet_num = models.IntegerField(blank=True, null=True)
+    road_address = models.CharField(max_length=100, blank=True, null=True)
+    male_child_toilet_num = models.IntegerField(blank=True, null=True)
+    male_child_urinal_num = models.IntegerField(blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
+    female_disabled_toilet_num = models.IntegerField(blank=True, null=True)
+    installation_year = models.CharField(max_length=50, blank=True, null=True)
+    update_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'gangwon_pyeongchang'
+
+
 class GangwonWonju(models.Model):
-    num = models.AutoField(primary_key=True)
     toilet_name = models.CharField(max_length=50, blank=True, null=True)
     male_female = models.CharField(max_length=1, blank=True, null=True)
     male_disabled_toilet_public_toiletnum = models.IntegerField(blank=True, null=True)
@@ -1434,6 +1487,34 @@ class GangwonWonju(models.Model):
     class Meta:
         managed = False
         db_table = 'gangwon_wonju'
+
+
+class GangwonYanggu(models.Model):
+    toilet_name = models.CharField(max_length=50, blank=True, null=True)
+    male_female = models.CharField(max_length=1, blank=True, null=True)
+    male_disabled_toilet_public_toiletnum = models.IntegerField(blank=True, null=True)
+    open_time = models.CharField(max_length=50, blank=True, null=True)
+    management_agency = models.CharField(max_length=50, blank=True, null=True)
+    male_toilent_num = models.IntegerField(blank=True, null=True)
+    male_disabled_urinal_num = models.IntegerField(blank=True, null=True)
+    call_number = models.CharField(max_length=50, blank=True, null=True)
+    land_address = models.CharField(max_length=100, blank=True, null=True)
+    female_toilet_num = models.IntegerField(blank=True, null=True)
+    sortation = models.CharField(max_length=50, blank=True, null=True)
+    male_urinal_num = models.IntegerField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+    female_child_toilet_num = models.IntegerField(blank=True, null=True)
+    road_address = models.CharField(max_length=100, blank=True, null=True)
+    male_child_toilet_num = models.IntegerField(blank=True, null=True)
+    male_child_urinal_num = models.IntegerField(blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
+    female_disabled_toilet_num = models.IntegerField(blank=True, null=True)
+    installation_year = models.CharField(max_length=50, blank=True, null=True)
+    update_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'gangwon_yanggu'
 
 
 class GangwonYangyang(models.Model):
@@ -2276,6 +2357,62 @@ class GyeonggiAnyang(models.Model):
         db_table = 'gyeonggi_anyang'
 
 
+class GyeonggiBucheon(models.Model):
+    toilet_name = models.CharField(max_length=50, blank=True, null=True)
+    male_female = models.CharField(max_length=1, blank=True, null=True)
+    male_disabled_toilet_public_toiletnum = models.IntegerField(blank=True, null=True)
+    open_time = models.CharField(max_length=50, blank=True, null=True)
+    management_agency = models.CharField(max_length=50, blank=True, null=True)
+    male_toilent_num = models.IntegerField(blank=True, null=True)
+    male_disabled_urinal_num = models.IntegerField(blank=True, null=True)
+    call_number = models.CharField(max_length=50, blank=True, null=True)
+    land_address = models.CharField(max_length=100, blank=True, null=True)
+    female_toilet_num = models.IntegerField(blank=True, null=True)
+    sortation = models.CharField(max_length=50, blank=True, null=True)
+    male_urinal_num = models.IntegerField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+    female_child_toilet_num = models.IntegerField(blank=True, null=True)
+    road_address = models.CharField(max_length=100, blank=True, null=True)
+    male_child_toilet_num = models.IntegerField(blank=True, null=True)
+    male_child_urinal_num = models.IntegerField(blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
+    female_disabled_toilet_num = models.IntegerField(blank=True, null=True)
+    installation_year = models.CharField(max_length=50, blank=True, null=True)
+    update_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'gyeonggi_bucheon'
+
+
+class GyeonggiDongducheon(models.Model):
+    toilet_name = models.CharField(max_length=50, blank=True, null=True)
+    male_female = models.CharField(max_length=1, blank=True, null=True)
+    male_disabled_toilet_public_toiletnum = models.IntegerField(blank=True, null=True)
+    open_time = models.CharField(max_length=50, blank=True, null=True)
+    management_agency = models.CharField(max_length=50, blank=True, null=True)
+    male_toilent_num = models.IntegerField(blank=True, null=True)
+    male_disabled_urinal_num = models.IntegerField(blank=True, null=True)
+    call_number = models.CharField(max_length=50, blank=True, null=True)
+    land_address = models.CharField(max_length=100, blank=True, null=True)
+    female_toilet_num = models.IntegerField(blank=True, null=True)
+    sortation = models.CharField(max_length=50, blank=True, null=True)
+    male_urinal_num = models.IntegerField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+    female_child_toilet_num = models.IntegerField(blank=True, null=True)
+    road_address = models.CharField(max_length=100, blank=True, null=True)
+    male_child_toilet_num = models.IntegerField(blank=True, null=True)
+    male_child_urinal_num = models.IntegerField(blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
+    female_disabled_toilet_num = models.IntegerField(blank=True, null=True)
+    installation_year = models.CharField(max_length=50, blank=True, null=True)
+    update_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'gyeonggi_dongducheon'
+
+
 class GyeonggiGapyeong(models.Model):
     toilet_name = models.CharField(max_length=50, blank=True, null=True)
     male_female = models.CharField(max_length=1, blank=True, null=True)
@@ -2330,6 +2467,34 @@ class GyeonggiGimpo(models.Model):
     class Meta:
         managed = False
         db_table = 'gyeonggi_gimpo'
+
+
+class GyeonggiGoyang(models.Model):
+    toilet_name = models.CharField(max_length=50, blank=True, null=True)
+    male_female = models.CharField(max_length=1, blank=True, null=True)
+    male_disabled_toilet_public_toiletnum = models.IntegerField(blank=True, null=True)
+    open_time = models.CharField(max_length=50, blank=True, null=True)
+    management_agency = models.CharField(max_length=50, blank=True, null=True)
+    male_toilent_num = models.IntegerField(blank=True, null=True)
+    male_disabled_urinal_num = models.IntegerField(blank=True, null=True)
+    call_number = models.CharField(max_length=50, blank=True, null=True)
+    land_address = models.CharField(max_length=100, blank=True, null=True)
+    female_toilet_num = models.IntegerField(blank=True, null=True)
+    sortation = models.CharField(max_length=50, blank=True, null=True)
+    male_urinal_num = models.IntegerField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+    female_child_toilet_num = models.IntegerField(blank=True, null=True)
+    road_address = models.CharField(max_length=100, blank=True, null=True)
+    male_child_toilet_num = models.IntegerField(blank=True, null=True)
+    male_child_urinal_num = models.IntegerField(blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
+    female_disabled_toilet_num = models.IntegerField(blank=True, null=True)
+    installation_year = models.CharField(max_length=50, blank=True, null=True)
+    update_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'gyeonggi_goyang'
 
 
 class GyeonggiGunpo(models.Model):
@@ -2808,6 +2973,34 @@ class GyeonggiYangpyeong(models.Model):
         db_table = 'gyeonggi_yangpyeong'
 
 
+class GyeonggiYeoju(models.Model):
+    toilet_name = models.CharField(max_length=50, blank=True, null=True)
+    male_female = models.CharField(max_length=1, blank=True, null=True)
+    male_disabled_toilet_public_toiletnum = models.IntegerField(blank=True, null=True)
+    open_time = models.CharField(max_length=50, blank=True, null=True)
+    management_agency = models.CharField(max_length=50, blank=True, null=True)
+    male_toilent_num = models.IntegerField(blank=True, null=True)
+    male_disabled_urinal_num = models.IntegerField(blank=True, null=True)
+    call_number = models.CharField(max_length=50, blank=True, null=True)
+    land_address = models.CharField(max_length=100, blank=True, null=True)
+    female_toilet_num = models.IntegerField(blank=True, null=True)
+    sortation = models.CharField(max_length=50, blank=True, null=True)
+    male_urinal_num = models.IntegerField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+    female_child_toilet_num = models.IntegerField(blank=True, null=True)
+    road_address = models.CharField(max_length=100, blank=True, null=True)
+    male_child_toilet_num = models.IntegerField(blank=True, null=True)
+    male_child_urinal_num = models.IntegerField(blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
+    female_disabled_toilet_num = models.IntegerField(blank=True, null=True)
+    installation_year = models.CharField(max_length=50, blank=True, null=True)
+    update_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'gyeonggi_yeoju'
+
+
 class GyeonggiYeoncheon(models.Model):
     toilet_name = models.CharField(max_length=50, blank=True, null=True)
     male_female = models.CharField(max_length=1, blank=True, null=True)
@@ -3060,34 +3253,6 @@ class GyeongnamHamyang(models.Model):
         db_table = 'gyeongnam_hamyang'
 
 
-class GyeongnamHapcheon(models.Model):
-    toilet_name = models.CharField(max_length=50, blank=True, null=True)
-    male_female = models.CharField(max_length=1, blank=True, null=True)
-    male_disabled_toilet_public_toiletnum = models.IntegerField(blank=True, null=True)
-    open_time = models.CharField(max_length=50, blank=True, null=True)
-    management_agency = models.CharField(max_length=50, blank=True, null=True)
-    male_toilent_num = models.IntegerField(blank=True, null=True)
-    male_disabled_urinal_num = models.IntegerField(blank=True, null=True)
-    call_number = models.CharField(max_length=50, blank=True, null=True)
-    land_address = models.CharField(max_length=100, blank=True, null=True)
-    female_toilet_num = models.IntegerField(blank=True, null=True)
-    sortation = models.CharField(max_length=50, blank=True, null=True)
-    male_urinal_num = models.IntegerField(blank=True, null=True)
-    longitude = models.FloatField(blank=True, null=True)
-    female_child_toilet_num = models.IntegerField(blank=True, null=True)
-    road_address = models.CharField(max_length=100, blank=True, null=True)
-    male_child_toilet_num = models.IntegerField(blank=True, null=True)
-    male_child_urinal_num = models.IntegerField(blank=True, null=True)
-    latitude = models.FloatField(blank=True, null=True)
-    female_disabled_toilet_num = models.IntegerField(blank=True, null=True)
-    installation_year = models.CharField(max_length=50, blank=True, null=True)
-    update_date = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'gyeongnam_hapcheon'
-
-
 class GyeongnamJinju(models.Model):
     toilet_name = models.CharField(max_length=50, blank=True, null=True)
     male_female = models.CharField(max_length=1, blank=True, null=True)
@@ -3310,6 +3475,34 @@ class IncheonGanghwa(models.Model):
     class Meta:
         managed = False
         db_table = 'incheon_ganghwa'
+
+
+class IncheonGyeyang(models.Model):
+    toilet_name = models.CharField(max_length=50, blank=True, null=True)
+    male_female = models.CharField(max_length=1, blank=True, null=True)
+    male_disabled_toilet_public_toiletnum = models.IntegerField(blank=True, null=True)
+    open_time = models.CharField(max_length=50, blank=True, null=True)
+    management_agency = models.CharField(max_length=50, blank=True, null=True)
+    male_toilent_num = models.IntegerField(blank=True, null=True)
+    male_disabled_urinal_num = models.IntegerField(blank=True, null=True)
+    call_number = models.CharField(max_length=50, blank=True, null=True)
+    land_address = models.CharField(max_length=100, blank=True, null=True)
+    female_toilet_num = models.IntegerField(blank=True, null=True)
+    sortation = models.CharField(max_length=50, blank=True, null=True)
+    male_urinal_num = models.IntegerField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+    female_child_toilet_num = models.IntegerField(blank=True, null=True)
+    road_address = models.CharField(max_length=100, blank=True, null=True)
+    male_child_toilet_num = models.IntegerField(blank=True, null=True)
+    male_child_urinal_num = models.IntegerField(blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
+    female_disabled_toilet_num = models.IntegerField(blank=True, null=True)
+    installation_year = models.CharField(max_length=50, blank=True, null=True)
+    update_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'incheon_gyeyang'
 
 
 class IncheonJunggu(models.Model):
@@ -4771,7 +4964,7 @@ class SeoulYeongdeungpo(models.Model):
 class SeoulYongsan(models.Model):
     toilet_name = models.CharField(max_length=50, blank=True, null=True)
     male_female = models.CharField(max_length=1, blank=True, null=True)
-    male_disabled_toilet_public_toiletnum = models.IntegerField(blank=True, null=True)
+    male_disabled_toilet_num = models.IntegerField(blank=True, null=True)
     open_time = models.CharField(max_length=50, blank=True, null=True)
     management_agency = models.CharField(max_length=50, blank=True, null=True)
     male_toilent_num = models.IntegerField(blank=True, null=True)
