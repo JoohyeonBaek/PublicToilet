@@ -1,50 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--    <table>-->
-<!--        <tr>>-->
-<!--            <th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th>-->
-<!--            <th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th>-->
-<!--            <th>1</th><th>1</th>-->
-<!--        </tr>-->
-<!--        {% for post in posts %}-->
-<!--        <tr>-->
-<!--            <td> {{ post.num }}</td>-->
-<!--            <td> {{ post.toilet_name }}</td>-->
-<!--            <td> {{ post.male_female }}</td>-->
-<!--            <td> {{ post.male_disabled_toilet_public_toiletnum }}</td>-->
-<!--            <td> {{ post.open_time }}</td>-->
-<!--            <td> {{ post.management_agency }}</td>-->
-<!--            <td> {{ post.male_toilent_num }}</td>-->
-<!--            <td> {{ post.male_disabled_urinal_num }}</td>-->
-<!--            <td> {{ post.call_number }}</td>-->
-<!--            <td> {{ post.land_address }}</td>-->
-<!--            <td> {{ post.female_toilet_num }}</td>-->
-<!--            <td> {{ post.sortation }}</td>-->
-<!--            <td> {{ post.male_urinal_num }}</td>-->
-<!--            <td> {{ post.longitude }}</td>-->
-<!--            <td> {{ post.female_child_toilet_num }}</td>-->
-<!--            <td> {{ post.road_address }}</td>-->
-<!--            <td> {{ post.male_child_toilet_num }}</td>-->
-<!--            <td> {{ post.male_child_urinal_num }}</td>-->
-<!--            <td> {{ post.latitude }}</td>-->
-<!--            <td> {{ post.female_disabled_toilet_num }}</td>-->
-<!--            <td> {{ post.installation_year }}</td>-->
-<!--            <td> {{ post.update_date }}</td>-->
-<!--        </tr>-->
-<!--        <script>-->
-<!--            console.log({{ post.open_time }})-->
-<!--        </script>-->
-<!--        {% endfor %}-->
-<!--    </table>-->
-<!--</body>-->
-<!--</html>-->
-
-
 <html>
 <head>
 
@@ -57,12 +10,12 @@
     <title>간단한 지도 표시하기</title>
 
     <script type="text/javascript"
-            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=6g2sdua1q0"></script>
+            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=6g2sdua1q0&submodules=geocoder"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 
 </head>
-<!--<body onload="load()">-->
+
 <body onload="load()">
 <div id="map" style="width:100%;height:100%;"></div>
 <p id="latit"></p>
@@ -73,12 +26,20 @@ var marker = []
 var path = []
 var contentString = []
 var infowindow = []
+var distance = {}
+var sortDistance = {}
+var userPosition
 var polygondate = {}
 var polygon = Object()
+var count = 0
+
+var useraddress1
+var useraddress2
+
 
 var map = new naver.maps.Map('map', {
-    center: new naver.maps.LatLng(37.3595704, 127.105399),
-    zoom: 10
+    center: new naver.maps.LatLng(35.1808805, 128.5521611),
+    zoom: 15
 });
 
 {% for post in posts %}
@@ -89,24 +50,30 @@ var map = new naver.maps.Map('map', {
 
     contentString.push(
     [
-    '<div class="iw_inner">',
-    '   <h5>{{ post.toilet_name }}</h5>',
-    '   <h6></h6>
-    '   개방시간 : {{ post.open_time}}',
-    '   남여공용 여부 : {{ post.male_female }}',
-    '',
-    '',
+    '<div style="margin:3%;">',
+    '   <h4>{{ post.toilet_name }}</h4>',
+    '   <h5>{{ post.call_number }}</h5>',
+    '   <h5>',
+    '       개방시간 : {{ post.open_time }}<br>',
+    '       남여공용 여부 : {{ post.male_female }}<br>',
+    '       남-대변기 수 : {{ post.male_toilet_num }}<br>',
+    '       남-소변기 수 : {{ post.male_urinal_num }}<br>',
+    '       여-대변기 수 : {{ post.female_toilet_num }}<br>',
+    '       남-장애인 소변기 수 : {{ post.male_disabled_public_toiletnum }}<br>',
+    '       남-장애인 대변기 수 : {{ post.male_disabled_urinal_num }}<br>',
+    '       여-장애인 대변기 수 : {{ post.female_disabled_toilet_num}}<br>',
+    '       남-어린이 소변기 수 : {{ post.male_child_toilet_num }}<br>',
+    '       남-어린이 대변기 수 : {{ post.male_child_urinal_num }}<br>',
+    '       여-어린이 대변기 수 : {{ post.female_child_toilet_num}}<br>',
+    '   </h5>',
     '</div>'
     ].join('')
     )
 
     var infoIndex = {{ post.id }} - 1
-
     infowindow.push(new naver.maps.InfoWindow({
         content: contentString[infoIndex]
     }))
-
-
     naver.maps.Event.addListener(marker[infoIndex], 'click', getClickHandler(infoIndex))
 
 {% endfor %}
@@ -123,12 +90,21 @@ function getClickHandler(seq) {
 
 
 
+function getJson() {
+    $.getJSON("{% static 'json/TL_SCCCO_SIG.json' %}", function(data){
 
+    console.log("잘됨")
+    console.log(useraddress1)
 
-$.getJSON("{% static 'json/TL_SCCO_SIG.json' %}", function(data){
-<!--feature 다음이 지역-->
+    if(useraddress1 == "세종특별자치시" || useraddress1 == "제주특별자치도") {
+        city = useraddress1
+    }
 
-    var cityIndex = data["features"].findIndex(p=>p.properties["SIG_KOR_NM"] == '원주시')
+    else {
+        city = useraddress2
+    }
+
+    var cityIndex = data["features"].findIndex(p=>p.properties["SIG_KOR_NM"] == city)
     var arrLength = data['features'][cityIndex]["geometry"]["coordinates"][0].length
 
 
@@ -138,9 +114,14 @@ $.getJSON("{% static 'json/TL_SCCO_SIG.json' %}", function(data){
         path.push(new naver.maps.LatLng(x,y))
     }
 });
+}
+
+setTimeout(getJson,300)
+
 
 <!--경계선 작성-->
 function setPolygon() {
+
     polygon = new naver.maps.Polygon({
         map: map,
         paths: path,
@@ -156,15 +137,39 @@ setTimeout(setPolygon,500)
 
 <!-- 현재 내 위치-->
 function successCallback(position) {
+
     var Lati = position.coords.latitude;
     var Long = position.coords.longitude;
     document.getElementById("latit").innerHTML = Lati;
     document.getElementById("longi").innerHTML = Long;
 
+    userPosition = new naver.maps.LatLng(Lati, Long)
 
     var markerOne = new naver.maps.Marker({
-        position: new naver.maps.LatLng(Lati, Long),
+        position: userPosition,
         map: map
+    });
+
+
+    map.setCenter(userPosition);
+
+
+    naver.maps.Service.reverseGeocode({
+        coords: new naver.maps.LatLng(Lati, Long),
+    }, function(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+            return alert('Something wrong!');
+        }
+
+        var result = response.v2, // 검색 결과의 컨테이너
+            items = result.results, // 검색 결과의 배열
+            userAddress2 = result.results[1].region.area2.name,
+            address = result.address,
+            useraddress = result.address.jibunAddress; // 검색 결과로 만든 주소
+            addressArr = useraddress.split(' ')
+
+        useraddress1 = addressArr[0]
+        useraddress2 = addressArr[1]
     });
 }
 
@@ -182,13 +187,39 @@ function load(){
 
 
 
+<!--&lt;!&ndash;가장 가까운 화장실 구하고 정보창 자동으로 띄우기&ndash;&gt;-->
+
+function setDistance() {
+    for(var i=0; i<marker.length; i++) {
+        distance[i] = map.getProjection().getDistance(userPosition,marker[i].position)
+    }
+
+    sortDistance = Object.keys(distance).map(function(key) {
+        return [key, distance[key]];
+    });
+
+    sortDistance.sort(function(first, second) {
+        return first[1] - second[1];
+    });
 
 
+    var findindex = Number(sortDistance[0][0])
+    infowindow[findindex].open(map,marker[findindex])
+}
 
+setTimeout(setDistance,500)
 
+<!--naver.maps.Event.addListener(map, 'click', function(e){-->
+<!--   // 지도를 클릭하면 아래 내용이 실행됩니다.-->
+<!--   alert(e.coord.lat() + ', ' + e.coord.lng());-->
+<!--   // e 는 클릭시 넘어오는 이벤트 (네이밍은 원하는 대로 하셔도 됩니다)-->
+<!--   // e 에서 필요한 것을 꺼내서 쓰면 됩니다.-->
+<!--   // e.coord.lat() 는 위도 (Latitude)  보통 약어로 lat-->
+<!--   // e.coord.lng() 는 경도 (Longitude) 보퉁 약어로 lng-->
+<!--});-->
 
 
 </script>
+
 </body>
 </html>
-

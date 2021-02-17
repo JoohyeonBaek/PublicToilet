@@ -4,11 +4,14 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+
+    <script type="text/javascript"
+            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=q7uoi30w6v&submodules=geocoder"></script>
     <title>공중화장실 찾기</title>
     {% block header %}
     {% endblock header%}
 </head>
-<body>
+<body onload="load()">
 <style>
         .main{
             width: auto;
@@ -50,9 +53,6 @@
 
 
         }
-
-
-
 </style>
 <header>
     <div class="main">
@@ -63,12 +63,569 @@
 </header>
 <main>
     <form>
-     <input type="button" name="search" value="주변 화장실 검색" onclick="location.href='http://127.0.0.1:8000/map'">
+        <input type="button" id="regio" name="search" value="주변 화장실 검색" onclick="location.href='http://127.0.0.1:8000/map'">
         <input type="button" name="search" value="조건 검색" onclick="location.href='http://127.0.0.1:8000/option'">
     </form>
-        </table>
-</main>
 
+</main>
+<script>
+function successCallback(position) {
+    var Lati = position.coords.latitude;
+    var Long = position.coords.longitude;
+    console.log(Lati)
+<!--    var Lati = 37.2471888-->
+<!--    var Long = 127.0578593-->
+
+    naver.maps.Service.reverseGeocode({
+        coords: new naver.maps.LatLng(Lati, Long),
+    }, function(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+            return alert('Something wrong!');
+        }
+        var result = response.v2, // 검색 결과의 컨테이너
+            userAddress1 = result.results[1].region.area1.name;
+            userAddress2 = result.results[1].region.area2.name;
+
+
+        if (userAddress1 =="부산광역시" && userAddress2 == "북구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/busanbuk'" );
+        }
+        else if (userAddress1 =="부산광역시" && userAddress2 == "동구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/busandong'" );
+        }
+        else if (userAddress1 =="부산광역시" && userAddress2 == "부산진구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/busanjin'" );
+        }
+        else if (userAddress1 =="부산광역시" && userAddress2 == "중구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/busanjung'" );
+        }
+        else if (userAddress1 =="부산광역시" && userAddress2 == "남구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/busannam'" );
+        }
+        else if (userAddress1 =="부산광역시" && userAddress2 == "사하구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/busansaha'" );
+        }
+        else if (userAddress1 =="부산광역시" && userAddress2 == "사상구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/busansasang'" );
+        }
+        else if (userAddress1 =="부산광역시" && userAddress2 == "서구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/busanseo'" );
+        }
+        else if (userAddress1 =="부산광역시" && userAddress2 == "수영구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/busansuyeong'" );
+        }
+        else if (userAddress1 =="부산광역시" && userAddress2 == "영도구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/busanyeongdo'" );
+        }
+        else if (userAddress1 =="부산광역시" && userAddress2 == "연제구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/busanyeonje'" );
+        }
+        else if (userAddress1 =="부산광역시" && userAddress2 == "영도구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/busanyeongdo'" );
+        }
+        else if (userAddress2 == "보은군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungbukboeun'" );
+        }
+        else if (userAddress2 == "청주시 상당구" || userAddress2 == "청주시 서원구" || userAddress2 == "청주시 흥덕구" || userAddress2 == "청주시 청원구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungbukcheongju'" );
+        }
+        else if (userAddress2 == "충추시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungbukchungju'" );
+        }
+        else if (userAddress2 == "단양군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungbukdanyang'" );
+        }
+        else if (userAddress2 == "음성군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungbukeumseong'" );
+        }
+        else if (userAddress2 == "제천시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungbukjecheon'" );
+        }
+        else if (userAddress2 == "진천군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungbukjincheon'" );
+        }
+        else if (userAddress2 == "옥천군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungbukokjcheon'" );
+        }
+        else if (userAddress2 == "영동군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungbukyeongdong'" );
+        }
+        else if (userAddress2 == "아산시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungnamasan'" );
+        }
+        else if (userAddress2 == "보령시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungnamboryeong'" );
+        }
+        else if (userAddress2 == "부여군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungnambuyeo'" );
+        }
+        else if (userAddress2 == "청양군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungnamcheongyang'" );
+        }
+        else if (userAddress2 == "금산군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungnamgeumsan'" );
+        }
+        else if (userAddress2 == "공주시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungnamgongju'" );
+        }
+        else if (userAddress2 == "계룡시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungnamgyeryong'" );
+        }
+        else if (userAddress2 == "논산시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungnamnonsan'" );
+        }
+        else if (userAddress2 == "서천군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungnamseocheon'" );
+        }
+        else if (userAddress2 == "서산시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/chungnamseosan'" );
+        }
+        else if (userAddress1 =="대구광역시" && userAddress2 == "북구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/daegubuk'" );
+        }
+        else if (userAddress2 == "달성구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/daegudalseong'" );
+        }
+        else if (userAddress1 =="대구광역시" && userAddress2 == "중구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/daegujung'" );
+        }
+        else if (userAddress1 =="대구광역시" && userAddress2 == "남구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/daegunam'" );
+        }
+        else if (userAddress1 =="대구광역시" && userAddress2 == "수성구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/daegususeong'" );
+        }
+        else if (userAddress2 == "대덕구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/daejeondaedeok'" );
+        }
+        else if (userAddress1 =="대전광역시" && userAddress2 == "동구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/daejeondong'" );
+        }
+        else if (userAddress1 =="대전광역시" && userAddress2 == "서구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/daejeonseo'" );
+        }
+        else if (userAddress2 == "유성구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/daejeonyuseong'" );
+        }
+        else if (userAddress2 == "동해시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gangwondonghae'" );
+        }
+        else if (userAddress2 == "고성군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gangwongoseong'" );
+        }
+        else if (userAddress2 == "홍천군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gangwonhongcheon'" );
+        }
+        else if (userAddress2 == "화천군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gangwonhwacheon'" );
+        }
+        else if (userAddress2 == "인제군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gangwoninje'" );
+        }
+        else if (userAddress2 == "정선군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gangwonjeongseon'" );
+        }
+        else if (userAddress2 == "평창군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gangwonpyeongchang'" );
+        }
+        else if (userAddress2 == "원주시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gangwonwonju'" );
+        }
+        else if (userAddress2 == "양양군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gangwonyangyang'" );
+        }
+        else if (userAddress2 == "양구군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gangwonyanggu'" );
+        }
+        else if (userAddress2 == "영월군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gangwonyeongwol'" );
+        }
+        else if (userAddress1 =="광주광역시" && userAddress2 == "동구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gwangjudong'" );
+        }
+        else if (userAddress1 =="광주광역시" && userAddress2 == "광산구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gwangjugwangsan'" );
+        }
+        else if (userAddress1 =="광주광역시" && userAddress2 == "북구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gwangjubuk'" );
+        }
+        else if (userAddress1 =="광주광역시" && userAddress2 == "남구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gwangjunam'" );
+        }
+        else if (userAddress1 =="광주광역시" && userAddress2 == "서구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gwangjuseo'" );
+        }
+        else if (userAddress2 == "안동시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukandong'" );
+        }
+        else if (userAddress2 == "봉화군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukbonghwa'" );
+        }
+        else if (userAddress2 == "청도군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukcheongdo'" );
+        }
+        else if (userAddress2 == "칠곡군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukchilgok'" );
+        }
+        else if (userAddress2 == "김천시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukgimcheon'" );
+        }
+        else if (userAddress2 == "구미시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukgumi'" );
+        }
+        else if (userAddress2 == "군위군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukgunwi'" );
+        }
+        else if (userAddress2 == "경주시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukgyeongju'" );
+        }
+        else if (userAddress2 == "경산시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukgyeongsan'" );
+        }
+        else if (userAddress2 == "문경시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukmungyeong'" );
+        }
+        else if (userAddress2 == "포항시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukpohang'" );
+        }
+        else if (userAddress2 == "상주시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbuksangju'" );
+        }
+        else if (userAddress2 == "의성군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukuiseong'" );
+        }
+        else if (userAddress2 == "울진군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukuljin'" );
+        }
+        else if (userAddress2 == "울릉군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukullreung'" );
+        }
+        else if (userAddress2 == "예천군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukyecheon'" );
+        }
+        else if (userAddress2 == "영천시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukyeongcheon'" );
+        }
+        else if (userAddress2 == "영덕군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukyeongduk'" );
+        }
+        else if (userAddress2 == "영양군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongbukyeongyang'" );
+        }
+        else if (userAddress2 == "안산시 단원구" || userAddress2 == "안산시 상록구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggiansan'" );
+        }
+        else if (userAddress2 == "안성시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggianseong'" );
+        }
+        else if (userAddress2 == "안양시 만안구" || userAddress2 == "안양시 동안구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggianyang'" );
+        }
+        else if (userAddress2 == "부천시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggibucheon'" );
+        }
+        else if (userAddress2 == "동두천시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggidongducheon'" );
+        }
+        else if (userAddress2 == "가평군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggigapyeong'" );
+        }
+        else if (userAddress2 == "김포시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggigimpo'" );
+        }
+        else if (userAddress2 == "고양시 일산동구" || userAddress2 == "고양시 일산서구" || userAddress2 == "고양시 덕양구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggigoyang'" );
+        }
+        else if (userAddress2 == "군포시"){
+            document.getElementById('re시gio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggigunpo'" );
+        }
+        else if (userAddress2 == "구리시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggiguri'" );
+        }
+        else if (userAddress2 == "광주시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggigwangju'" );
+        }
+        else if (userAddress2 == "광명시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggigwangmyeong'" );
+        }
+        else if (userAddress2 == "하남시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggihanam'" );
+        }
+        else if (userAddress2 == "화성시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggihwaseong'" );
+        }
+        else if (userAddress2 == "이천시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggiicheon'" );
+        }
+        else if (userAddress2 == "남양주시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongginamyangju'" );
+        }
+        else if (userAddress2 == "오산시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggiosan'" );
+        }
+        else if (userAddress2 == "파주시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggipaju'" );
+        }
+        else if (userAddress2 == "평택시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggipyeongtaek'" );
+        }
+        else if (userAddress2 == "성남시 중원구" || userAddress2 == "성남시 수정구" || userAddress2 == "성남시 분당구" ){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggiseongnam'" );
+        }
+        else if (userAddress2 == "시흥시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggisiheung'" );
+        }
+        else if (userAddress2 == "수원시 장안구" || userAddress2 == "수원시 권선구" || userAddress2 == "수원시 팔달구" || userAddress2 == "수원시 영통구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggisuwon'" );
+        }
+        else if (userAddress2 == "의정부시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggiuijeongbu'" );
+        }
+        else if (userAddress2 == "양주시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggiyangju'" );
+        }
+        else if (userAddress2 == "양평군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggiyangpyeong'" );
+        }
+        else if (userAddress2 == "여주시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggiyeoju'" );
+        }
+        else if (userAddress2 == "연천군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggiyeoncheon'" );
+        }
+        else if (userAddress2 == "용인시 처인구" || userAddress2 == "용인시 기흥구" || userAddress2 == "용인시 수지구" ){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeonggiyongin'" );
+        }
+        else if (userAddress2 == "창원시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongnamchangwon'" );
+        }
+        else if (userAddress2 == "거제시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongnamgeoje'" );
+        }
+        else if (userAddress2 == "김해시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongnamgimhae'" );
+        }
+        else if (userAddress2 == "고성군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongnamgoseong'" );
+        }
+        else if (userAddress2 == "하동군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongnamhadong'" );
+        }
+        else if (userAddress2 == "함안군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongnamhaman'" );
+        }
+        else if (userAddress2 == "함양군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongnamhamyang'" );
+        }
+        else if (userAddress2 == "합천군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongnamhapcheon'" );
+        }
+        else if (userAddress2 == "진주시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongnamjinju'" );
+        }
+        else if (userAddress2 == "밀양시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongnammiryang'" );
+        }
+        else if (userAddress2 == "남해군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongnamnamhae'" );
+        }
+        else if (userAddress2 == "사천시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongnamsacheon'" );
+        }
+        else if (userAddress2 == "통영시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongnamtongyeong'" );
+        }
+        else if (userAddress2 == "의령군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/gyeongnamuiryeong'" );
+        }
+        else if (userAddress1 == "인천광역시" && userAddress2 == "동구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/incheondong'" );
+        }
+        else if (userAddress1 == "인천광역시" && userAddress2 == "강화군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/incheonganghwa'" );
+        }
+        else if (userAddress1 == "인천광역시" && userAddress2 == "계양구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/incheongyeyang'" );
+        }
+        else if (userAddress1 == "인천광역시" && userAddress2 == "중구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/incheonjung'" );
+        }
+        else if (userAddress1 == "인천광역시" && userAddress2 == "옹진군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/incheonongjin'" );
+        }
+        else if (userAddress1 == "인천광역시" && userAddress2 == "남동구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/incheonnamdong'" );
+        }
+        else if (userAddress1 == "인천광역시" && userAddress2 == "서구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/incheonseo'" );
+        }
+        else if (userAddress1 == "인천광역시" && userAddress2 == "연수구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/incheonyeonsu'" );
+        }
+        else if (userAddress2 == "서귀포시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jejuseogwipo'" );
+        }
+        else if (userAddress2 == "부안군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonbukbuan'" );
+        }
+        else if (userAddress2 == "고창군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonbukgochang'" );
+        }
+        else if (userAddress2 == "군산시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonbukgunsan'" );
+        }
+        else if (userAddress2 == "임실군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonbukimsil'" );
+        }
+        else if (userAddress2 == "정읍시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonbukjeongeup'" );
+        }
+        else if (userAddress2 == "남원시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonbuknamwon'" );
+        }
+        else if (userAddress2 == "순창군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonbuksunchang'" );
+        }
+        else if (userAddress2 == "완주군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonbukwanju'" );
+        }
+        else if (userAddress2 == "보성군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnamboseong'" );
+        }
+        else if (userAddress2 == "강진군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnamgangjin'" );
+        }
+        else if (userAddress2 == "고흥군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnamgoheung'" );
+        }
+        else if (userAddress2 == "곡성군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnamgokseong'" );
+        }
+        else if (userAddress2 == "구례군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnamgurye'" );
+        }
+        else if (userAddress2 == "해남시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnamhanam'" );
+        }
+        else if (userAddress2 == "함평군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnamhampyeong'" );
+        }
+        else if (userAddress2 == "화순군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnamhwasun'" );
+        }
+        else if (userAddress2 == "장흥군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnamjangheung'" );
+        }
+        else if (userAddress2 == "장성군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnamjangseong'" );
+        }
+        else if (userAddress2 == "목포시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnammokpo'" );
+        }
+        else if (userAddress2 == "순천시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnamsuncheon'" );
+        }
+        else if (userAddress2 == "완도군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnamwando'" );
+        }
+        else if (userAddress2 == "영암군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnamyeongam'" );
+        }
+        else if (userAddress2 == "영광군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnamyeonggwang'" );
+        }
+        else if (userAddress2 == "여수시"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/jeonnamyeosu'" );
+        }
+        else if (userAddress2 == "도봉구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seouldobong'" );
+        }
+        else if (userAddress2 == "동작구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seouldongjak'" );
+        }
+        else if (userAddress2 == "은평구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seouleunpyeong'" );
+        }
+        else if (userAddress2 == "강동구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulgangdong'" );
+        }
+        else if (userAddress2 == "강남구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulgangnam'" );
+        }
+        else if (userAddress2 == "강서구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulgangseo'" );
+        }
+        else if (userAddress2 == "금천구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulgeumcheon'" );
+        }
+        else if (userAddress2 == "구로구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulguro'" );
+        }
+        else if (userAddress2 == "관악구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulgwanak'" );
+        }
+        else if (userAddress2 == "종로구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seouljongro'" );
+        }
+        else if (userAddress2 == "중랑구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seouljungrang'" );
+        }
+        else if (userAddress2 == "마포구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulmapo'" );
+        }
+        else if (userAddress2 == "노원구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulnowon'" );
+        }
+        else if (userAddress2 == "서초구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulseocho'" );
+        }
+        else if (userAddress2 == "서대문구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulseodaemoon'" );
+        }
+        else if (userAddress2 == "성북구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulseongbuk'" );
+        }
+        else if (userAddress2 == "성동구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulseongdong'" );
+        }
+        else if (userAddress2 == "송파구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulsongpa'" );
+        }
+        else if (userAddress2 == "양천구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulyangcheon'" );
+        }
+        else if (userAddress2 == "영등포구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulyeongdeungpo'" );
+        }
+        else if (userAddress2 == "용산구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/seoulyongsan'" );
+        }
+        else if (userAddress1 == "울산광역시" && userAddress2 == "동구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/ulsandong'" );
+        }
+        else if (userAddress1 == "울산광역시" && userAddress2 == "남구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/ulsannam'" );
+        }
+        else if (userAddress1 == "울산광역시" && userAddress2 == "서구"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/ulsanseo'" );
+        }
+        else if (userAddress1 == "울산광역시" && userAddress2 == "울주군"){
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/ulsanulju'" );
+        }
+    });
+}
+
+function errorCallback(error) {
+   alert(error.message);
+}
+function load(){
+   if ( navigator.geolocation ) {
+      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+   } else {
+      alert("geolocation not supported");
+   }
+}
+</script>
 
 {% endblock explain_contents%}
 </body>

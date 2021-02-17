@@ -1,47 +1,159 @@
 {% extends "base.html" %}
 {% load static %}
 {%  block explain_contents %}
-<div><h2>화장실 조건</h2></div>
-   <form name="toiletForm">
-      <select name="city" size="1" onchange="redirect(this.options.selectedIndex)">
-         <option>서울특별시</option>
-         <option>부산광역시</option>
-         <option>대구광역시</option>
-         <option>인천광역시</option>
-         <option>광주광역시</option>
-         <option>대전광역시</option>
-         <option>울산광역시</option>
-         <option>세종특별자치시</option>
-         <option>경기도</option>
-         <option>강원도</option>
-         <option>충청북도</option>
-         <option>충청남도</option>
-         <option>전라북도</option>
-         <option>전라남도</option>
-         <option>경상북도</option>
-         <option>경상남도</option>
-         <option>제주특별자치도</option>
-      </select>
+<body>
+<style>
+   * {
+      font-family:"잘풀리는하루 Medium";
 
-      <select name="sido" size="1">
-<!--      <option value="?">구</option> 형식으로 값넣을것-->
-         <option>강남구</option> <option>강동구</option> <option>강북구</option>
-         <option>강서구</option> <option>관악구</option> <option>광진구</option>
-         <option>구로구</option> <option>금천구</option> <option>노원구</option>
-         <option>도봉구</option> <option>동대문구</option> <option>동작구</option>
-         <option>마포구</option> <option>서대문구</option> <option>서초구</option>
-         <option>성동구</option> <option>성북구</option> <option>송파구</option>
-         <option>양천구</option> <option>영등포구</option> <option>용산구</option>
-         <option>은평구</option> <option>종로구</option>
-         <option>중구</option> <option>중랑구</option>
-      </select>
-      <script>
+
+   }
+   .content{
+      border:5px solid #9CC6FF;
+      border-radius:20px;
+      width:510px;
+      height:850px;
+      position:absolute;
+      top:0;
+      right:0;
+      bottom:0;
+      left:0;
+      margin:auto;
+   }
+
+   .condition p{
+      font-size:37px;
+      color:#9CC6FF;
+      margin-top:50px;
+      margin-bottom:50px;
+      text-align:center;
+   }
+   select {
+margin-left:65px;
+      margin-bottom:25px;
+      width:150px;
+      height:37px;
+      border:3px solid #9CC6FF;
+      border-radius: 5px;
+
+   }
+   .open_time{
+      text-align:center;
+
+   }
+   .open_time p{
+      color:#9CC6FF;
+      font-size:20px;
+      margin-bottom:7px;
+   }
+
+   .disabled{
+      text-align:center;
+   }
+   .disabled p{
+      color:#9CC6FF;
+      font-size:20px;
+      margin-bottom:7px;
+   }
+
+   .male_female{
+      text-align:center;
+   }
+   .male_female p{
+      color:#9CC6FF;
+      font-size:20px;
+      margin-bottom:7px;
+   }
+
+   .child_toilet{
+      text-align:center;
+   }
+   .child_toilet p{
+      color:#9CC6FF;
+      font-size:20px;
+      margin-bottom:7px;
+   }
+
+   input[type=radio] {
+      margin-bottom:25px;
+   }
+   .footer{
+      text-align:center;
+      margin-top:50px;
+   }
+   input[type=submit] {
+      background-color:#9CC6FF;
+      border: none;
+      height:62px;
+      width:125px;
+      color:white;
+      border-radius: 10px;
+      font-size:22px;
+      text-align:center;
+   }
+
+
+</style>
+<div class="content">
+<div class="condition">
+    <p><b>화장실 조건</b></p>
+</div>
+<form action="http://127.0.0.1:8000/map" name="toiletForm" method="get">
+    <select name="city" size="1" onchange="redirect(this.options.selectedIndex)">
+        <option>서울특별시</option>
+        <option>부산광역시</option>
+        <option>대구광역시</option>
+        <option>인천광역시</option>
+        <option>광주광역시</option>
+        <option>대전광역시</option>
+        <option>울산광역시</option>
+        <option>세종특별자치시</option>
+        <option>경기도</option>
+        <option>강원도</option>
+        <option>충청북도</option>
+        <option>충청남도</option>
+        <option>전라북도</option>
+        <option>전라남도</option>
+        <option>경상북도</option>
+        <option>경상남도</option>
+        <option>제주특별자치도</option>
+    </select>
+
+    <select name="sido" size="1">
+        <!--      <option value="?">구</option> 형식으로 값넣을것-->
+        <option>강남구</option>
+        <option>강동구</option>
+        <option>강북구</option>
+        <option>강서구</option>
+        <option>관악구</option>
+        <option>광진구</option>
+        <option>구로구</option>
+        <option>금천구</option>
+        <option>노원구</option>
+        <option>도봉구</option>
+        <option>동대문구</option>
+        <option>동작구</option>
+        <option>마포구</option>
+        <option>서대문구</option>
+        <option>서초구</option>
+        <option>성동구</option>
+        <option>성북구</option>
+        <option>송파구</option>
+        <option>양천구</option>
+        <option>영등포구</option>
+        <option>용산구</option>
+        <option>은평구</option>
+        <option>종로구</option>
+        <option>중구</option>
+        <option>중랑구</option>
+    </select>
+    <script>
          var groups=document.toiletForm.city.options.length
          var group=new Array(groups)
          for (i=0; i<groups; i++)
          group[i]=new Array()
 
-<!--      group[i][j]=new Option("구","link") link->ex)"http://naver.com"-->
+<!--     group[i][j]=new Option("구","link") link->ex)"http://naver.com"-->
          group[0][0]=new Option("강남구"), group[0][1]=new Option("강동구")
          group[0][2]=new Option("강북구"), group[0][3]=new Option("강서구")
          group[0][4]=new Option("관악구"), group[0][5]=new Option("광진구")
@@ -190,32 +302,42 @@
          }
 
 
-      </script>
 
-   <div class="open_time">
-      개방시간 :
-      <input type="radio" name="open_time" value="time1" checked="checked"> 상관없음
-      <input type="radio" name="open_time" value="time2"> 24시간(연중무휴)
-      <input type="radio" name="open_time" value="time3"> 그외
-   </div><br>
-   <div class="male_female">
-      남여공용화장실 :
-      <input type="radio" name="male_female" value="sex1" checked="checked"> 상관없음
-      <input type="radio" name="male_female" value="sex2"> YES
-      <input type="radio" name="male_female" value="sex3"> NO
-   </div><br>
+    </script>
+
+    <div class="open_time">
+        <p>개방시간</p><br>
+        <input type="radio" name="open_time" value="time1" checked="checked"> 상관없음
+        <input type="radio" name="open_time" value="time2"> 24시간(연중무휴)
+        <input type="radio" name="open_time" value="time3"> 09~18시
+    </div>
+    <br>
+    <div class="male_female">
+        <p>남여공용화장실</p><br>
+        <input type="radio" name="male_female" value="sex1" checked="checked"> 상관없음
+        <input type="radio" name="male_female" value="sex2"> YES
+        <input type="radio" name="male_female" value="sex3"> NO
+    </div>
+    <br>
     <div class="disabled">
-      남/녀 장애인 변기 유무 :
-      <input type="radio" name="disabled" value="dis1" checked="checked"> 상관없음
-      <input type="radio" name="disabled" value="dis2"> 남자 장애인 변기 유
-      <input type="radio" name="disabled" value="dis3"> 여자 장애인 변기 유
-   </div><br>
+        <p>남/녀 장애인 변기</p><br>
+        <input type="radio" name="disabled" value="dis1" checked="checked"> 상관없음
+        <input type="radio" name="disabled" value="dis2"> 남자 장애인 변기 유
+        <input type="radio" name="disabled" value="dis3"> 여자 장애인 변기 유
+    </div>
+    <br>
     <div class="child_toilet">
-      남/녀 어린이용 변기 유무 :
-      <input type="radio" name="child_toilet" value="child1" checked="checked"> 상관없음
-      <input type="radio" name="child_toilet" value="child2"> 남자 어린이용 변기 유
-      <input type="radio" name="child_toilet" value="child3"> 여자 어린이용 변기 유
-   </div><br>
-    <input type="submit" value="찾아보기">
-    </form>
+        <p>남/녀 어린이용 변기</p><br>
+        <input type="radio" name="child_toilet" value="child1" checked="checked"> 상관없음
+        <input type="radio" name="child_toilet" value="child2"> 남자 어린이용 변기 유
+        <input type="radio" name="child_toilet" value="child3"> 여자 어린이용 변기 유
+    </div>
+    <br>
+    <div class="footer">
+        <input type="submit" value="찾아보기">
+    </div>
+
+</form>
+</div>
+</body>
 {% endblock explain_contents %}

@@ -6,9 +6,7 @@ from django.shortcuts import render
 from .models import BusanDong
 from .models import *
 
-def wonju_view(request):
-    posts = GangwonWonju.objects.all()
-    return render(request, 'index.html', {"posts": posts})
+
 
 def BusanBuk_view(request):
     posts = BusanBuk.objects.all()
@@ -139,7 +137,7 @@ def DaeguBuk_view(request):
     return render(request, 'index.html', {"posts": posts})
 
 def DaeguDalseo_view(request):
-    posts = GangwonWonju.objects.all()
+    posts = DaeguDalseo.objects.all()
     return render(request, 'index.html', {"posts": posts})
 
 def DaeguDalseong_view(request):
@@ -200,6 +198,10 @@ def GangwonJeongseon_view(request):
 
 def GangwonPyeongchang_view(request):
     posts = GangwonPyeongchang.objects.all()
+    return render(request, 'index.html', {"posts": posts})
+
+def GangwonWonju_view(request):
+    posts = GangwonWonju.objects.all()
     return render(request, 'index.html', {"posts": posts})
 
 def GangwonYanggu_view(request):
@@ -300,6 +302,10 @@ def GyeongbukUlleung_view(request):
 
 def GyeongbukYecheon_view(request):
     posts = GyeongbukYecheon.objects.all()
+    return render(request, 'index.html', {"posts": posts})
+
+def GyeongbukYeongcheon_view(request):
+    posts = GyeongbukYeongcheon.objects.all()
     return render(request, 'index.html', {"posts": posts})
 
 def GyeongbukYeongdeok_view(request):
