@@ -6,3 +6,4 @@ K-Digital 3 Team Project
 
 Naver Map API
 Django
+mataplotlib
