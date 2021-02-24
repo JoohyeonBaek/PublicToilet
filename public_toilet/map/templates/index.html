@@ -1,6 +1,5 @@
 <html>
 <head>
-
     {% load static %}
 
     <meta charset="UTF-8">
@@ -12,14 +11,12 @@
     <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=6g2sdua1q0&submodules=geocoder"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-
 </head>
 
 <body onload="load()">
 <div id="map" style="width:100%;height:100%;"></div>
-<p id="latit"></p>
-<p id="longi"></p>
+
+>
 
 <script>
 var marker = []
@@ -43,9 +40,11 @@ var map = new naver.maps.Map('map', {
 });
 
 {% for post in posts %}
+    count = count + 1
     marker.push(new naver.maps.Marker({
         position: new naver.maps.LatLng({{ post.latitude }}, {{ post.longitude }}),
-        map: map
+        map: map,
+
     }))
 
     contentString.push(
@@ -56,10 +55,10 @@ var map = new naver.maps.Map('map', {
     '   <h5>',
     '       개방시간 : {{ post.open_time }}<br>',
     '       남여공용 여부 : {{ post.male_female }}<br>',
-    '       남-대변기 수 : {{ post.male_toilet_num }}<br>',
+    '       남-대변기 수 : {{ post.male_toilent_num }}<br>',
     '       남-소변기 수 : {{ post.male_urinal_num }}<br>',
     '       여-대변기 수 : {{ post.female_toilet_num }}<br>',
-    '       남-장애인 소변기 수 : {{ post.male_disabled_public_toiletnum }}<br>',
+    '       남-장애인 소변기 수 : {{ post.male_disabled_toilet_public_toiletnum }}<br>',
     '       남-장애인 대변기 수 : {{ post.male_disabled_urinal_num }}<br>',
     '       여-장애인 대변기 수 : {{ post.female_disabled_toilet_num}}<br>',
     '       남-어린이 소변기 수 : {{ post.male_child_toilet_num }}<br>',
@@ -88,16 +87,19 @@ function getClickHandler(seq) {
     }
 }
 
-
-
 function getJson() {
     $.getJSON("{% static 'json/TL_SCCCO_SIG.json' %}", function(data){
 
     console.log("잘됨")
+    console.log(useraddress2)
     console.log(useraddress1)
 
     if(useraddress1 == "세종특별자치시" || useraddress1 == "제주특별자치도") {
         city = useraddress1
+    }
+
+    else if(useraddress2 == "동구" || useraddress2=="남구" || useraddress2 == "북구" || useraddress2 == "서구" || useraddress2 == "중구") {
+        city = useraddress1[0] + useraddress1[1] + useraddress2
     }
 
     else {
@@ -140,19 +142,20 @@ function successCallback(position) {
 
     var Lati = position.coords.latitude;
     var Long = position.coords.longitude;
-    document.getElementById("latit").innerHTML = Lati;
-    document.getElementById("longi").innerHTML = Long;
 
     userPosition = new naver.maps.LatLng(Lati, Long)
 
     var markerOne = new naver.maps.Marker({
         position: userPosition,
-        map: map
+        map: map,
+        icon: {
+            url: "{% static 'img/user_marker.png' %}",
+
+        }
     });
 
 
     map.setCenter(userPosition);
-
 
     naver.maps.Service.reverseGeocode({
         coords: new naver.maps.LatLng(Lati, Long),
@@ -185,8 +188,6 @@ function load(){
    }
 }
 
-
-
 <!--&lt;!&ndash;가장 가까운 화장실 구하고 정보창 자동으로 띄우기&ndash;&gt;-->
 
 function setDistance() {
@@ -209,6 +210,16 @@ function setDistance() {
 
 setTimeout(setDistance,500)
 
+
+function setCenter() {
+    if(count == 0) {
+        map.setCenter(path[0])
+        map.setZoom(12)
+    }
+}
+
+setTimeout(setCenter,300)
+
 <!--naver.maps.Event.addListener(map, 'click', function(e){-->
 <!--   // 지도를 클릭하면 아래 내용이 실행됩니다.-->
 <!--   alert(e.coord.lat() + ', ' + e.coord.lng());-->
@@ -217,8 +228,6 @@ setTimeout(setDistance,500)
 <!--   // e.coord.lat() 는 위도 (Latitude)  보통 약어로 lat-->
 <!--   // e.coord.lng() 는 경도 (Longitude) 보퉁 약어로 lng-->
 <!--});-->
-
-
 </script>
 
 </body>

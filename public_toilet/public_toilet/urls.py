@@ -26,4 +26,5 @@ urlpatterns = [
     path('', views.home_view, name='home_view'),
     path('option/', include('option.urls')),
     path('map/', include('map.urls')),
+    path('chart/', include('chart.urls'))
 ]

@@ -72,9 +72,9 @@
 function successCallback(position) {
     var Lati = position.coords.latitude;
     var Long = position.coords.longitude;
+<!--    var Lati = 36.8138339-->
+<!--    var Long = 127.1148293-->
     console.log(Lati)
-<!--    var Lati = 37.2471888-->
-<!--    var Long = 127.0578593-->
 
     naver.maps.Service.reverseGeocode({
         coords: new naver.maps.LatLng(Lati, Long),
@@ -611,6 +611,9 @@ function successCallback(position) {
         }
         else if (userAddress1 == "울산광역시" && userAddress2 == "울주군"){
             document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/ulsanulju'" );
+        }
+        else {
+            document.getElementById('regio').setAttribute('onclick', "location.href='http://127.0.0.1:8000/map/'" );
         }
     });
 }

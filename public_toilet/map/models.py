@@ -4964,7 +4964,7 @@ class SeoulYeongdeungpo(models.Model):
 class SeoulYongsan(models.Model):
     toilet_name = models.CharField(max_length=50, blank=True, null=True)
     male_female = models.CharField(max_length=1, blank=True, null=True)
-    male_disabled_toilet_num = models.IntegerField(blank=True, null=True)
+    male_disabled_toilet_public_toiletnum = models.IntegerField(blank=True, null=True)
     open_time = models.CharField(max_length=50, blank=True, null=True)
     management_agency = models.CharField(max_length=50, blank=True, null=True)
     male_toilent_num = models.IntegerField(blank=True, null=True)

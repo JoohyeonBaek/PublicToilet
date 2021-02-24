@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{%  block explain_contents %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .chart {
+            width: 60%;
+            height: 50%;
+        }
+
+    </style>
+</head>
+<body>
+
+<center>
+    <img src="{% static 'img/chart.png' %}" class="chart">
+</center>
+{% endblock explain_contents%}
+</body>
+</html>

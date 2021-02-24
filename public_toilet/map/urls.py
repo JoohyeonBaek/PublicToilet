@@ -4,8 +4,9 @@ from . import views
 from django.conf.urls import url
 
 
+
 urlpatterns = [
-    path('', views.BusanBuk_view, name='index2'),
+    path('', views.Option_view, name='index2'),
     url(r'^busanbuk/$', views.BusanBuk_view, name='busanbuk'),
     url(r'^busandong/$', views.BusanDong_view, name='busandong'),
     url(r'^busandongnae/$', views.BusanDongnae_view, name='busandongnae'),

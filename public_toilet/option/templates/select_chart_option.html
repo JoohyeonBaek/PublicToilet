@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{%  block explain_contents %}
+<style>
+   * {
+      font-family:"잘풀리는하루 Medium";
+   }
+
+
+   button {
+      background-color:#9CC6FF;
+      border: none;
+      height:62px;
+      width:125px;
+      color:white;
+      border-radius: 10px;
+      font-size:16px;
+      text-align:center;
+   }
+
+   form {
+        padding-top : 15%;
+   }
+
+</style>
+
+<body>
+
+<center>
+    <form action="http://127.0.0.1:8000/chart/chartoption" name="toiletForm" method="get">
+        <br><br>
+        <button type="submit" name="city" value="서울특별시">서울특별시</button>
+        <button type="submit" name="city" value="부산광역시">부산광역시</button>
+        <button type="submit" name="city" value="대구광역시">대구광역시</button>
+        <button type="submit" name="city" value="인천광역시">인천광역시</button>
+        <button type="submit" name="city" value="광주광역시">광주광역시</button>
+        <button type="submit" name="city" value="대전광역시">대전광역시</button>
+        <button type="submit" name="city" value="울산광역시">울산광역시</button>
+        <button type="submit" name="city" value="경기도">경기도</button>
+        <br><br>
+        <button type="submit" name="city" value="강원도">강원도</button>
+        <button type="submit" name="city" value="충청북도">충청북도</button>
+        <button type="submit" name="city" value="충청남도">충청남도</button>
+        <button type="submit" name="city" value="전라북도">전라북도</button>
+        <button type="submit" name="city" value="전라남도">전라남도</button>
+        <button type="submit" name="city" value="경상북도">경상북도</button>
+        <button type="submit" name="city" value="경상남도">경상남도</button>
+        <button type="submit" name="city" value="제주특별자치도">제주특별자치도</button>
+    </form>
+</center>
+
+
+</body>
+
+{% endblock explain_contents %}
+
+{% block chart_contents %}
+
+{% endblock chart_contents %}
+

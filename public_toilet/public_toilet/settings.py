@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'public_toilet',
     'option',
     'map',
+    'chart'
 ]
 
 MIDDLEWARE = [
