@@ -15,4 +15,10 @@ K-Digital Project
 * Database
   * MariaDB
 * Map API
-  * Naver Map API       
+  * Naver Map API
+
+## 데이터 수집
+*  화장실 위치정보
+*  화장실 상세정보
+*  공공데이터 포털
+*  https://www.data.go.kr/tcs/lms/liv/selectLocationView.do
